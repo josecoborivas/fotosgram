@@ -9,6 +9,11 @@ import { Post } from 'src/app/interfaces/interfaces';
 export class PostComponent implements OnInit {
 
   @Input() post: Post = {};
+
+  img1 = './assets/gato-4.jpg';
+  img2 = './assets/gato-5.jpg';
+  img3 = './assets/gato-9.jpg';
+  img4 = './assets/gato-3.jpg';
   constructor() { }
 
   ngOnInit() {}
