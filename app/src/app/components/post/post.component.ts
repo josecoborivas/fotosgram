@@ -14,6 +14,8 @@ export class PostComponent implements OnInit {
   img2 = './assets/gato-5.jpg';
   img3 = './assets/gato-9.jpg';
   img4 = './assets/gato-3.jpg';
+  img5 = './assets/gato-2.jpg';
+  img6 = './assets/gato-10.jpg';
   constructor() { }
 
   ngOnInit() {}

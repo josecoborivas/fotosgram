@@ -14,12 +14,15 @@
 
 <ion-content [fullscreen]="true" color="light">
   <!-- Refresher -->
+  <ion-refresher slot="fixed" (ionRefresh)="recargar($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
   <!-- Posts -->
   <app-posts [posts]="posts"></app-posts>
 
   <!-- Infinit scroll -->
-  <ion-infinite-scroll threshold="150px" (ionInfinite)="siguientes($event)">
+  <ion-infinite-scroll [disabled]="!habilitado" threshold="150px" (ionInfinite)="siguientes($event)">
     <ion-infinite-scroll-content>
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
