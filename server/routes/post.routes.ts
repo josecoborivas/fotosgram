@@ -9,7 +9,7 @@ const fileSystem = new FileSystem();
 
 
 //Obtener Post por pagina
-postRouter.get('/', [verificarToken], async (req: any, res: Response)=> {
+postRouter.get('/', async (req: any, res: Response)=> {
 
     let pagina = Number(req.query.pagina) || 1;
     let skip = pagina -1;

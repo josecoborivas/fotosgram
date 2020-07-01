@@ -1,0 +1,21 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="primary" class="ion-padding-start">
+    <ion-buttons slot="start">
+        <ion-icon slot="icon-only"  name="logo-instagram"></ion-icon>
+    </ion-buttons>
+
+
+    <ion-title class="title">
+      FotosGram
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="light">
+  <!-- Refresher -->
+
+  <!-- Posts -->
+  <app-posts [posts]="posts"></app-posts>
+
+  <!-- Infinit scroll -->
+</ion-content>
