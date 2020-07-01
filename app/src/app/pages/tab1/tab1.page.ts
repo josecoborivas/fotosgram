@@ -13,10 +13,22 @@ export class Tab1Page implements OnInit {
   constructor(private postService: PostsService) {}
 
   ngOnInit(){
-    this.postService.getPosts().subscribe(result => {
-      console.log(result);
-      this.posts.push(...result.posts);
-    });
+    this.siguientes();
+  }
+
+  siguientes(event?){
+    setTimeout(() => {
+      this.postService.getPosts().subscribe(result => {
+        console.log(result);
+        this.posts.push(...result.posts);
+        if(event){
+          event.target.complete();
+          if(result.posts.length === 0) {
+            event.target.disabled = true;
+          }
+        }
+      });
+    }, 500);
   }
 
 }
