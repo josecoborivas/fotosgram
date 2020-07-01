@@ -74,6 +74,14 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  //orange instagram
+  --ion-color-orange: #fc9700cc;
+  --ion-color-orange-rgb: 255, 196, 9;
+  --ion-color-orange-contrast: #e9e50e;
+  --ion-color-orange-contrast-rgb: 0, 0, 0;
+  --ion-color-orange-shade: #e0ac08;
+  --ion-color-orange-tint: #ffca22;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -145,6 +153,13 @@
     --ion-color-light-contrast-rgb: 255,255,255;
     --ion-color-light-shade: #1e2023;
     --ion-color-light-tint: #383a3e;
+
+    --ion-color-orange: #fc9700cc;
+    --ion-color-orange-rgb: 255, 196, 9;
+    --ion-color-orange-contrast: #000000;
+    --ion-color-orange-contrast-rgb: 0, 0, 0;
+    --ion-color-orange-shade: #e0ac08;
+    --ion-color-orange-tint: #ffca22;
   }
 
   /*
