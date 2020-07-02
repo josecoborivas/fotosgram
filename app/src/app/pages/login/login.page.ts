@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import {IonSlides, NavController} from '@ionic/angular';
 import { UsuarioService } from '../../services/usuario.service';
 import { UiServiceService } from '../../services/ui-service.service';
+import { Usuario } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-login',
@@ -11,46 +12,6 @@ import { UiServiceService } from '../../services/ui-service.service';
 })
 export class LoginPage implements OnInit {
 
-  avatars = [
-    {
-      img: 'av-1.png',
-      seleccionado: true
-    },
-    {
-      img: 'av-2.png',
-      seleccionado: false
-    },
-    {
-      img: 'av-3.png',
-      seleccionado: false
-    },
-    {
-      img: 'av-4.png',
-      seleccionado: false
-    },
-    {
-      img: 'av-5.png',
-      seleccionado: false
-    },
-    {
-      img: 'av-6.png',
-      seleccionado: false
-    },
-    {
-      img: 'av-7.png',
-      seleccionado: false
-    },
-    {
-      img: 'av-8.png',
-      seleccionado: false
-    },
-  ];
-
-  avatarSlide = {
-    slidesPerView: 3.5,
-    
-  }
-
   slidePrincipalOptions = {
     allowTouchMove: false
   }
@@ -58,6 +19,13 @@ export class LoginPage implements OnInit {
   loginUser = {
     email: 'josecoborivas@gmail.com',
     password: '123456'
+  }
+
+  registerUser: Usuario = {
+    nombre: 'Test',
+    password: '123456',
+    email: 'test',
+    avatar: 'av-1.png'
   }
 
   @ViewChild('slidePrincipal') slides: IonSlides;
@@ -80,6 +48,8 @@ export class LoginPage implements OnInit {
   }
 
   async login(fLogin: NgForm){
+    if(fLogin.invalid) return;
+
     const existe = await this.usuarioService.login(this.loginUser.email, this.loginUser.password);
     if(existe){
       //navegar al tabs
@@ -90,14 +60,18 @@ export class LoginPage implements OnInit {
     }
   }
 
-  registro(fRegistro: NgForm){
+  async registro(fRegistro: NgForm){
+    if(fRegistro.invalid) return;
     console.log(fRegistro.valid);
 
-  }
+    const valido = await this.usuarioService.registro(this.registerUser);
 
-  selectAvatar(avatar){
-    this.avatars.forEach(avatar => avatar.seleccionado = false);
-    avatar.seleccionado = true;
+    if(valido){
+      //navegar al tabs
+      this.navCtrl.navigateRoot('/main/tabs/tab1', {animated: true});
+    } else {
+      //mostrar alerta de login incorrecto
+      this.uiService.alertaInformativa(`El email: ${this.registerUser.email} ya existe.`);
+    }
   }
-
 }
