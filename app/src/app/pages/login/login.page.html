@@ -1,7 +1,7 @@
 <ion-content>
 
 
-  <ion-slides class="mainSlide">
+  <ion-slides class="mainSlide" [options]="slidePrincipalOptions" #slidePrincipal>
     
     <ion-slide>
 
@@ -143,7 +143,8 @@
                       expand="full"
                       size="small"
                       fill="outline"
-                      color="tertiary">
+                      color="tertiary"
+                      (click)="goToLogin()">
             Ingresar
           </ion-button>
       </ion-col>
@@ -153,7 +154,8 @@
                     expand="full"
                     size="small"
                     fill="outline"
-                    color="tertiary">
+                    color="tertiary"
+                    (click)="goToResiter()">
           Registrarme
         </ion-button>
       </ion-col>

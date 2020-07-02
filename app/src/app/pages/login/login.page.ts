@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import {IonSlides} from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -44,12 +45,28 @@ export class LoginPage implements OnInit {
   ];
 
   avatarSlide = {
-    slidesPerView: 3.5
+    slidesPerView: 3.5,
+    
   }
+
+  slidePrincipalOptions = {
+    allowTouchMove: false
+  }
+
+  @ViewChild('slidePrincipal') slides: IonSlides;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  goToResiter(){
+    this.slides.slideTo(1, 500);
+    
+  }
+
+  goToLogin(){
+    this.slides.slidePrev();
   }
 
   login(fLogin: NgForm){
