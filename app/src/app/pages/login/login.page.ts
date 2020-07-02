@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {IonSlides, NavController} from '@ionic/angular';
 import { UsuarioService } from '../../services/usuario.service';
+import { UiServiceService } from '../../services/ui-service.service';
 
 @Component({
   selector: 'app-login',
@@ -61,7 +62,10 @@ export class LoginPage implements OnInit {
 
   @ViewChild('slidePrincipal') slides: IonSlides;
 
-  constructor(private usuarioService: UsuarioService, private navCtrl: NavController) { }
+  constructor(
+    private usuarioService: UsuarioService,
+    private navCtrl: NavController,
+    private uiService: UiServiceService) { }
 
   ngOnInit() {
   }
@@ -82,6 +86,7 @@ export class LoginPage implements OnInit {
       this.navCtrl.navigateRoot('/main/tabs/tab1', {animated: true});
     } else {
       //mostrar alerta de login incorrecto
+      this.uiService.alertaInformativa('Usuario/Contraseña incorrectos.');
     }
   }
 

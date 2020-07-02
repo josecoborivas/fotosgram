@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { resolve } from 'dns';
-import { rejects } from 'assert';
 
 const url = environment.url;
 
