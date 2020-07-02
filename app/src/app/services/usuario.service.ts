@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Usuario } from '../interfaces/interfaces';
 import { NavController } from '@ionic/angular';
+import { UiServiceService } from './ui-service.service';
 
 const url = environment.url;
 
@@ -13,9 +14,21 @@ const url = environment.url;
 export class UsuarioService {
 
   token: string = null;
-  usuario: Usuario = {};
+  private usuario: Usuario = {};
 
-  constructor(private storage: Storage, private http: HttpClient, private navCtrl: NavController) { }
+  constructor(
+    private storage: Storage,
+    private http: HttpClient,
+    private navCtrl: NavController,
+    private uiService: UiServiceService) { }
+
+
+  getUsuario(){
+    if(!this.usuario._id) {
+      this.validarToken();
+    }
+    return {...this.usuario};
+  }
 
   login(email: string, password: string){
     const data = {email, password};
@@ -84,6 +97,25 @@ export class UsuarioService {
         }
       });
     });
+  }
+
+  actulizarUsuario(usuario: Usuario) {
+    const headers = new HttpHeaders({
+      'x-token': this.token
+    });
+
+    return new Promise( resolve => {
+      this.http.post(`${url}/user/update`, usuario, { headers }).subscribe( result => {
+        if(result['ok']) {
+          this.guardarToken(result['token']);
+          resolve(true);
+        } else {
+          this.uiService.alertaInformativa('No se pudo actualizar el usuario.');
+          resolve(false);
+        }
+      });
+    });
+
   }
 
 }

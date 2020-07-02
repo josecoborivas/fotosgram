@@ -44,7 +44,7 @@
               <ion-button type="submit"
                           color="tertiary"
                           shape="round"
-                          >
+                          [disabled]="fLogin.invalid">
                 Login
               </ion-button>
             </ion-col>
@@ -70,7 +70,7 @@
                         <ion-list>
                             
                             <ion-item>
-                            <ion-label>Email</ion-label>
+                            <ion-label position="floating">Email</ion-label>
                             <ion-input name="email" 
                                         type="email"
                                         [(ngModel)]="registerUser.email"
@@ -78,7 +78,7 @@
                             </ion-item>
 
                             <ion-item>
-                            <ion-label>Nombre</ion-label>
+                            <ion-label position="floating">Nombre</ion-label>
                             <ion-input name="nombre"
                                         type="text"
                                         [(ngModel)]="registerUser.nombre"
@@ -86,7 +86,7 @@
                             </ion-item>
 
                             <ion-item>
-                            <ion-label>Password</ion-label>
+                            <ion-label position="floating">Password</ion-label>
                             <ion-input name="password"
                                         type="password"
                                         [(ngModel)]="registerUser.password"
@@ -101,7 +101,8 @@
                 <ion-col>
                     <ion-button type="submit"
                                 color="tertiary"
-                                shape="round">
+                                shape="round"
+                                [disabled]="fRegistro.invalid">
                         Crear usuario
                     </ion-button>
                 </ion-col>
