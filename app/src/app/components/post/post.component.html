@@ -9,7 +9,7 @@
     </ion-label>
   </ion-item>
 
-  <ion-slides mode="ios" pager="true">
+  <!-- <ion-slides mode="ios" pager="true">
     <ion-slide class="image-slide"
                [style]="img1 | domSanitizer">
     </ion-slide>
@@ -35,7 +35,9 @@
     </ion-slide>
 
    
-  </ion-slides>
+  </ion-slides> -->
+
+  <app-mapa [coord]="post.coord"></app-mapa>
 
   <ion-item lines="none">
     <ion-icon slot="start" name="heart-outline"></ion-icon>
