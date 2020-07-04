@@ -10,6 +10,8 @@ export interface Post {
   mensaje?: string;
   usuario?: Usuario;    
   created?: string;
+  coordenadas?: string;
+  position?: boolean;
 }
 
 export interface Usuario {

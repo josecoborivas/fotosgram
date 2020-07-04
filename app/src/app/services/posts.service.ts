@@ -1,7 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, EventEmitter } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { RespuestaPosts } from '../interfaces/interfaces';
+import { RespuestaPosts, Post, Usuario } from '../interfaces/interfaces';
+import { NavController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+import { UsuarioService } from './usuario.service';
 
 const url = environment.url;
 
@@ -12,7 +15,9 @@ export class PostsService {
 
   paginaPosts = 0;
 
-  constructor(private http: HttpClient) { }
+  nuevoPost = new EventEmitter<Post>();
+
+  constructor(private http: HttpClient, private storage: Storage, private navCtrl: NavController, private usuarioService: UsuarioService) { }
 
   getPosts(pull: boolean = false){
     if(pull){
@@ -20,5 +25,23 @@ export class PostsService {
     }
     this.paginaPosts ++;
     return this.http.get<RespuestaPosts>(`${url}/post/?pagina=${this.paginaPosts}`);
+  }
+
+  crearPost(post: Post){
+    const headers = new HttpHeaders({
+      'x-token': this.usuarioService.token
+    });
+
+    return new Promise( resolve => {
+      return this.http.post(`${url}/post/`, post, { headers }).subscribe( result => {
+        console.log(result);
+        if(result['ok']){
+          this.nuevoPost.emit(result['post']);
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    })
   }
 }
