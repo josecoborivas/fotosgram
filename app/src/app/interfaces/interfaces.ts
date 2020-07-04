@@ -10,7 +10,7 @@ export interface Post {
   mensaje?: string;
   usuario?: Usuario;    
   created?: string;
-  coordenadas?: string;
+  coord?: string;
   position?: boolean;
 }
 
