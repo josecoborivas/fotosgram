@@ -5,6 +5,9 @@ import { UiServiceService } from '../../services/ui-service.service';
 import { Post } from '../../interfaces/interfaces';
 import { NavController } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+
+declare var window: any;
 
 @Component({
   selector: 'app-tab2',
@@ -28,15 +31,12 @@ export class Tab2Page implements OnInit {
     private postService: PostsService,
     private uiService: UiServiceService,
     private navCtrl: NavController,
-    private geolocation: Geolocation) {}
+    private geolocation: Geolocation,
+    private camera: Camera) {}
 
   ngOnInit(){
 
   }
-
-
-
-  
 
   async crearPost(){
     console.log(this.post);
@@ -47,6 +47,7 @@ export class Tab2Page implements OnInit {
           coord: '',
           position: false
         };
+        this.tempImages = [];
         this.uiService.toastInformativo('Post creado exitosamente!', 'success');
         this.navCtrl.navigateRoot('/main/tabs/tab1');
       }
@@ -82,6 +83,43 @@ export class Tab2Page implements OnInit {
 
 
     console.log(this.post)
+  }
+
+  getPicture(){
+    const options: CameraOptions = {
+      quality: 60,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType: this.camera.PictureSourceType.CAMERA
+    }
+    this.procesarImagen(options);
+  }
+
+
+  procesarImagen(options: CameraOptions){
+    this.camera.getPicture(options).then((imageData) => {
+     
+      const img = window.Ionic.WebView.convertFileSrc(imageData);
+      console.log(img)
+      this.postService.subirImagen(imageData);
+      this.tempImages.push(img);
+     }, (err) => {
+      // Handle error
+     });
+  }
+
+  libreria(){
+    const options: CameraOptions = {
+      quality: 20,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+    }
+    this.procesarImagen(options);
   }
    
 
